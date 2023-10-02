@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# load actual files and folders.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+AddType application/x-httpd-php .html
+
+
+# redirect anything else to index.php
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]

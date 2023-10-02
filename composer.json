@@ -1,0 +1,10 @@
+{
+    "name": "softeng/bytebazaar",
+    "description": "College group requirement in Software Engineering, Adamson University, 2023.",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {}
+}
