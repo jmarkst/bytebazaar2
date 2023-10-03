@@ -31,6 +31,22 @@ class Request {
         return $_SERVER['REQUEST_METHOD'];
     }
     
+    public function isGet() {
+        /**
+         * isGet()
+         * Returns true kapag GET ang request method.
+        */
+        return $this->getMethod() == "GET";
+    }
+    
+    public function isPost() {
+        /**
+         * isPost()
+         * Returns true kapag POST ang request method.
+        */
+        return $this->getMethod() == "POST";
+    }
+    
     
     public function getBody() {
         /**

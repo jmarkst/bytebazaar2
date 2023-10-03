@@ -10,9 +10,6 @@ class Router {
     public Request $request;
     public Response $response;
     
-    // yung gagamiting layout
-    public string $layout = 'Main';
-    
     public function __construct(Request $request, Response $response) {
         /**
          * __construct()
@@ -70,7 +67,8 @@ class Router {
         
         if (is_array($callback)) {
             // i-instance natin yung controller class kung array.
-            $callback[0] = new $callback[0];
+            Application::$APP->controller = new $callback[0];
+            $callback[0] = Application::$APP->controller;
         }
         
         return call_user_func($callback, $this->request);
@@ -97,17 +95,6 @@ class Router {
         return str_replace("{{content}}", $viewContent, $layoutContent);
     }
     
-        
-    public function setLayout($layout) {
-        /**
-         * setLayout($layout)
-         * Sine-set yung layout na gagamitin.
-         * Parameters:
-         * - (string) $layout: yung layout na gagamitin.
-        */
-        $this->layout = $layout;
-    }
-    
     protected function getLayout($params = []) {
         /**
          * getLayout($layout) [layoutContent]
@@ -119,7 +106,7 @@ class Router {
             $$key = $value;
         }
         ob_start();
-        $layout = ucfirst($this->layout);
+        $layout = Application::$APP->controller->layout;
         include_once Application::$ROOT."/../views/layouts/$layout.php";
         return ob_get_clean();
     }

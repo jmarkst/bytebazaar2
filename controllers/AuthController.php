@@ -16,10 +16,10 @@ class AuthController extends Controller {
          * login()
          * Login page (/auth/login)
         */
-        if ($request->getMethod() === "GET") {
+        if ($request->isGet()) {
             return $this->render('login');
         } else {
-            // POST
+            return "POST";
         }
     }
     
@@ -28,10 +28,28 @@ class AuthController extends Controller {
          * register()
          * Register page (/auth/register)
         */
-        if ($request->getMethod() === "GET") {
-            return $this->render('register');
+        $model = new RequestModel();
+        $errors = [];
+        
+        if ($request->isGet()) {
+            return $this->render('register', [
+                    'model' => $model,
+                    'errors' => []
+                ]);
+            
         } else {
-            // POST.
+            $model->load($request->getBody());
+            
+            if ($model->validate() && $model->register()) {
+                // kung validate na at registered na yung account, success page.
+                return "Success";
+            }
+            
+            // may errors ibig sabihin kung umabot dito yung code.
+            return $this->render('register', [
+                'model' => $model,
+                'errors' => $errors
+            ]);
         }
     }
 }

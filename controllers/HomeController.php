@@ -15,9 +15,7 @@ class HomeController extends Controller {
          * home()
          * Default home page (GET /).
         */
-        $params = [
-            'login' => false
-            ]; // TODO: sessions management.
+        $params = [];
         return $this->render('home', $params);
     }
 }
