@@ -1,8 +1,12 @@
 <h1>Register</h1>
 <form method="POST" name="register">
     <input type="text" name="username" placeholder="Username" />
-    <input type="text" name="fname" placeholder="First name" />
-    <input type="text" name="lname" placeholder="Last name" />
+    <input type="text" name="firstName" placeholder="First name" />
+    <input type="text" name="middleName" placeholder="Middle name" /><br>
+    <input type="checkbox" name="hasMiddleName" default="false"/>I have no middle name
+    <input type="text" name="lastName" placeholder="Last name" />
+    <input type="text" name="suffix" placeholder="Name suffix" /><br>
+    <input type="checkbox" name="hasSuffix" default="false"/>I have no name suffix
     <br>
     <select name="gender">
         <option>Gender</option>
