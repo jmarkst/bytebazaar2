@@ -56,6 +56,12 @@ class Router {
         $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
         
+        if (is_array($callback)) {
+            // i-instance natin yung controller class kung array.
+            Application::$APP->controller = new $callback[0];
+            $callback[0] = Application::$APP->controller;
+        }
+        
         if ($callback == false) {
             $this->response->setStatusCode(404);
             return $this->renderView(404);
@@ -63,12 +69,6 @@ class Router {
         
         if (is_string($callback)) {
             return $this->renderView($callback);
-        }
-        
-        if (is_array($callback)) {
-            // i-instance natin yung controller class kung array.
-            Application::$APP->controller = new $callback[0];
-            $callback[0] = Application::$APP->controller;
         }
         
         return call_user_func($callback, $this->request);

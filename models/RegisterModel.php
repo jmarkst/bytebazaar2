@@ -13,10 +13,10 @@ class RegisterModel extends Model {
     public string $username;
     public string $firstName;
     public string $middleName;
-    public boolean $hasMiddleName;
+    public bool $hasMiddleName;
     public string $lastName;
     public string $suffix;
-    public boolean $hasSuffix;
+    public bool $hasSuffix;
     public int $gender; // 0 - not to say, 1 - male, 2 female
     public string $email;
     public string $password;

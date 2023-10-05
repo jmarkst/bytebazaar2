@@ -1,6 +1,8 @@
 <?php
 namespace app\core;
 
+use app\controllers\HomeController;
+
 class Application {
     /**
     * Application class
@@ -22,6 +24,7 @@ class Application {
         */
         self::$ROOT = $root;
         self::$APP = $this;
+        $this->controller = new HomeController(); // default.
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
