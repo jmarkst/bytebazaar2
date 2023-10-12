@@ -30,7 +30,7 @@ class AuthController extends Controller {
          * Register page (/auth/register)
         */
         
-        //$model = new RegisterModel();
+        $model = new RegisterModel();
         $errors = [];
         
         if ($request->isGet()) {
@@ -39,20 +39,22 @@ class AuthController extends Controller {
                     'errors' => []
                 ]);
             
-        } else {/**
+        } else {
             $model->load($request->getBody());
-            
-            if ($model->validate() && $model->register()) {
+            if ($model->validate()/** && $model->register()**/) {
                 // kung validate na at registered na yung account, success page.
                 return "Success";
             }
+            echo "<pre>";
+            var_dump($model->errors);
+            echo "</pre>";
             
             // may errors ibig sabihin kung umabot dito yung code.
             return $this->render('register', [
                 'model' => $model,
-                'errors' => $errors
-            ]);**/
-            return "Post";
+                'errors' => $model->errors
+            ]);
+            
         }
     }
 }

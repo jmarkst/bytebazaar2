@@ -17,7 +17,7 @@ class RegisterModel extends Model {
     public string $lastName;
     public string $suffix;
     public bool $hasSuffix;
-    public int $gender; // 0 - not to say, 1 - male, 2 female
+    public string $gender; // 0 - not to say, 1 - male, 2 female
     public string $email;
     public string $password;
     public string $confirm;
@@ -33,14 +33,14 @@ class RegisterModel extends Model {
     
     public function rules(): array {
         return [
-                'username' => [self::RULE_REQUIRED, [self::RULE_MIN, 8], [self::RULE_MAX, 24]],
+                'username' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8], [self::RULE_MAX, 'max' => 24]],
                 'firstName' => [self::RULE_REQUIRED],
-                'middleName' => [[self::RULE_HAS, 'mustTrue' => 'hasMiddleName']],
+                'middleName' => [self::RULE_NULL],
                 'lastName' => [self::RULE_REQUIRED],
-                'suffix' => [[self::RULE_HAS, 'mustTrue' => 'hasSuffix'], self::RULE_VALID_SUFFIX],
+                'suffix' => [self::RULE_NULL, self::RULE_VALID_SUFFIX],
                 'gender' => [self::RULE_REQUIRED],
                 'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
-                'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 8]],
+                'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8]],
                 'confirm' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']]
             ];
     }

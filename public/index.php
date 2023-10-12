@@ -6,7 +6,7 @@ use app\controllers\AuthController;
 
 // lagay dito yung path mula htdocs na lalabas sa localhost
 // e.g. localhost:80/folder/folder2 => /folder/folder2 dapat ito.
-public const ROUTE_HEAD = ""; // development purposes
+const ROUTE_HEAD = ""; // development purposes
  
 $app = new Application(__DIR__);
 
